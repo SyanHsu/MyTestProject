@@ -117,7 +117,7 @@ MonoBehaviour:
   Branches:
   - "\u9009\u9879A"
   - "\u9009\u9879B"
-  choice: -1
+  choice: 1
 --- !u!114 &-763547302416522061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
     dialog: "\uFF01\uFF01\uFF01"
   Branches:
   - "\u6492\u7684\u53D1\u751F"
-  choice: 0
+  choice: -1
 --- !u!114 &-532028815397959956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
   - {fileID: -763547302416522061}
   - {fileID: 2738776495047423816}
   startNode: {fileID: 3929628053082710799}
-  currentNode: {fileID: -5027803584650177813}
+  currentNode: {fileID: -763547302416522061}
 --- !u!114 &2738776495047423816
 MonoBehaviour:
   m_ObjectHideFlags: 0

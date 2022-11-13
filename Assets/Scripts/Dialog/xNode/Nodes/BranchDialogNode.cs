@@ -12,8 +12,8 @@ public class BranchDialogNode : DialogNode
     [HideInInspector] public int choice;
 
     // 使用前要先设定choice
-    public override bool IsLastNode => choice < 0 ? false : 
-        GetOutputPort("Branches" + choice).IsConnected;
+    public override bool IsLastNode => choice >= 0 && 
+        GetOutputPort("Branches " + choice).IsConnected;
 
     public override void MoveNextNode()
     {
@@ -24,7 +24,7 @@ public class BranchDialogNode : DialogNode
         }
 
         DialogGraph dialogGraph = graph as DialogGraph;
-        NodePort exitPort = GetOutputPort("Branches" + choice);
+        NodePort exitPort = GetOutputPort("Branches " + choice);
         if (!exitPort.IsConnected)
         {
             dialogGraph.SetCurrentNode(null);

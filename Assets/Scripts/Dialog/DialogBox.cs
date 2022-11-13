@@ -144,42 +144,34 @@ public class DialogBox : MonoBehaviour
 
     private void SetButtons(List<string> branches)
     {
-        List<Button> buttonList = SetButtonCount(branches.Count);
-        for (int i = 0; i < buttonList.Count; i++)
-        {
-            buttonList[i].GetComponentInChildren<Text>().text = branches[i];
-        }
-    }
-
-    private List<Button> SetButtonCount(int count)
-    {
+        int count = branches.Count;
         List<Button> buttonList = buttons.
             GetComponentsInChildren<Button>(true).ToList();
         if (buttonList.Count < count)
         {
             while (buttonList.Count < count)
             {
-                Button newButton = Instantiate<GameObject>(
-                    buttonPrefab, buttons.transform).GetComponent<Button>();
+                Button newButton = Instantiate(buttonPrefab, buttons.transform)
+                    .GetComponent<Button>();
+                int choice = buttonList.Count;
+                newButton.onClick.AddListener(() => {
+                    CurrentDialogGraph.SetChoice(choice);
+                });
                 newButton.onClick.AddListener(HideButtons);
                 buttonList.Add(newButton);
             }
         }
-        else
+        for (int i = 0; i < buttonList.Count; i++)
         {
-            for (int i = 0; i < buttonList.Count; i++)
+            if (i < count)
             {
-                if (i < count)
-                {
-                    buttonList[i].gameObject.SetActive(true);
-                }
-                else
-                {
-                    buttonList[i].gameObject.SetActive(false);
-                    buttonList.RemoveAt(i);
-                }
+                buttonList[i].gameObject.SetActive(true);
+                buttonList[i].GetComponentInChildren<Text>().text = branches[i];
+            }
+            else
+            {
+                buttonList[i].gameObject.SetActive(false);
             }
         }
-        return buttonList;
     }
 }
