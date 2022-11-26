@@ -2,13 +2,14 @@ using UnityEngine;
 
 namespace Services
 {
+    [DefaultExecutionOrder(-2)]
     public class ObjectManager : Service
     {
         private ObjectManagerCore core;
 
-        protected internal override void Init()
+        protected override void Awake()
         {
-            base.Init();
+            base.Awake();
             core = new ObjectManagerCore(this, Resources.Load<ObjectManagerData>("ObjectManagerData"));
         }
 
@@ -33,13 +34,15 @@ namespace Services
         /// <returns>被激活的游戏物体</returns>
         public IMyObject Activate(EObject eObject, Vector3 position, float eulerAngleZ = 0f, Transform parent = null)
             => core.Activate(eObject, position, new Vector3(0f, 0f, eulerAngleZ), parent);
+        public IMyObject Activate(EObject eObject, Vector3 position, Transform parent)
+            => core.Activate(eObject, position, Vector3.zero, parent);
 
         /// <summary>
         /// 预生成物体
         /// </summary>
         /// <param name="eObject">要生成的游戏物体对应的枚举</param>
         /// <param name="count">数量</param>
-        public void PreCreate(EObject eObject,int count)
+        public void PreCreate(EObject eObject, int count)
             => core.PreCreate(eObject, count);
     }
 }

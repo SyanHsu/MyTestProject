@@ -3,58 +3,29 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-[DefaultExecutionOrder(-999)]
 public class GameLauncher : MonoBehaviour
 {
     public bool needConfirm;
 
+    // 如果需要按键确认，则需要指定滑动窗和文字
     public Slider progressSlider;
     public Text reminderText;
 
     private SceneController sceneController;
 
-    private int count_incomplete;
-    /// <summary>
-    /// 剩余的初始化任务数
-    /// </summary>
-    public int Count_Incomplete
-    {
-        get => count_incomplete;
-        set
-        {
-            if (value < 0 || value == count_incomplete)
-                return;
-            if (value == 0)
-                StartGame();
-            count_incomplete = value;
-        }
-    }
-
-    private void Awake()
-    {
-        Count_Incomplete = 1;
-    }
-
     private void Start()
     {
         sceneController = ServiceLocator.Get<SceneController>();
-        Invoke(nameof(Initialize), 1f);
-    }
-
-    private void Initialize()
-    {
-        Random.InitState(System.DateTime.Now.Second);
-        Count_Incomplete--;
+        Invoke(nameof(StartGame), 1f);
     }
 
     private void StartGame()
     {
-        GameInitSettings settings = Resources.Load<GameInitSettings>("GameInitSettings");
         if (needConfirm)
         {
             sceneController.AsyncLoadScene += OnLoadingScene;
         }
-        sceneController.LoadScene(settings == null ? 1 : settings.index_startGame, needConfirm);
+        sceneController.LoadScene(1, needConfirm);
     }
 
     private void OnLoadingScene(AsyncOperation asyncOperation)

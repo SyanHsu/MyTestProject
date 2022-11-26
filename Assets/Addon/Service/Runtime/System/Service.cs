@@ -14,29 +14,26 @@ namespace Services
             ServiceLocator.Register(this);
         }
 
-        protected void Start()
+        protected virtual void Start()
         {
             GetOtherService();
-            Init();
-            ServiceLocator.ServiceInit?.Invoke(this);
+            //Init();
+            //ServiceLocator.ServiceInit?.Invoke(this);
         }
 
-        protected internal virtual void Init() { }
+        //protected virtual void Init() { }
 
+        /// <summary>
+        /// 获取Other特性的服务
+        /// </summary>
         internal void GetOtherService()
         {
-            static T GetAttribute<T>(MemberInfo member, bool inherit = false) where T : Attribute
-            {
-                object[] ret = member.GetCustomAttributes(typeof(T), inherit);
-                return ret.Length > 0 ? ret[0] as T : null;
-            }
-
             FieldInfo[] infos = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             foreach (FieldInfo info in infos)
             {
                 Type type = info.FieldType;
-                OtherAttribute attribute = GetAttribute<OtherAttribute>(info, true);
-                if (attribute != null && type.IsSubclassOf(typeof(Service)))
+                if (info.GetCustomAttribute(typeof(OtherAttribute), true) 
+                    is OtherAttribute attribute && type.IsSubclassOf(typeof(Service)))
                 {
                     if (attribute.type != null && attribute.type.IsSubclassOf(type))
                         type = attribute.type;

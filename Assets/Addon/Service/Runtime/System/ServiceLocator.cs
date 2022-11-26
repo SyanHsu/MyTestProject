@@ -10,7 +10,7 @@ namespace Services
         /// <summary>
         /// 非0场景中的物体通常直接获取Service，不需要利用此事件
         /// </summary>
-        public static UnityAction<Service> ServiceInit;
+        //public static UnityAction<Service> ServiceInit;
 
         internal static readonly Dictionary<Type, Service> serviceDict = new Dictionary<Type, Service>();
 
