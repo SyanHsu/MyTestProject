@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f64b6510f49974c9c101f9b0e98a61, type: 3}
   m_Name: ObjectManagerData
   m_EditorClassIdentifier: 
-  datas: []
+  datas:
+  - eObject: 0
+    prefab: {fileID: 8512072031903354556, guid: ec19b0e83b7bf39409b0d0d10c5873c9, type: 3}
+  - eObject: 1
+    prefab: {fileID: 8764635307405578477, guid: 375db4bcc087c6b4db790d5a81b9b6f8, type: 3}
+  - eObject: 2
+    prefab: {fileID: 2547661210057516751, guid: 3ae6bd93dc56d554bb5da76e7e1abf17, type: 3}

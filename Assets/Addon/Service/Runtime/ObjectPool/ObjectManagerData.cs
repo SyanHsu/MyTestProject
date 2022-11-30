@@ -7,7 +7,6 @@ namespace Services
     {
         [SerializeField]
         internal EObjectPrefabPair[] datas;
-        [SerializeField]
         internal Dictionary<EObject, GameObject> objectDict;
 
         public void Initialize()
