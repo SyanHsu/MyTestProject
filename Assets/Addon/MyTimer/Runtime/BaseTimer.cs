@@ -54,4 +54,37 @@ namespace MyTimer
             base.Initialize(0f, duration, duration, start);
         }
     }
+
+    /// <summary>
+    /// 仅倒计时
+    /// </summary>
+    public class CountdownTimer : Timer<float, LeftTime>
+    {
+        public void Initialize(float duration, bool start = true)
+        {
+            base.Initialize(0f, duration, duration, start);
+        }
+    }
+
+    /// <summary>
+    /// 利用百分比的计时器
+    /// </summary>
+    public class PercentTimerOnly : Timer<float, CurrentPercent>
+    {
+        public void Initialize(float duration, bool start = true)
+        {
+            base.Initialize(0f, duration, duration, start);
+        }
+    }
+
+    /// <summary>
+    /// 利用剩余百分比的计时器
+    /// </summary>
+    public class CountdownPercentTimer : Timer<float, LeftPercent>
+    {
+        public void Initialize(float duration, bool start = true)
+        {
+            base.Initialize(0f, duration, duration, start);
+        }
+    }
 }
